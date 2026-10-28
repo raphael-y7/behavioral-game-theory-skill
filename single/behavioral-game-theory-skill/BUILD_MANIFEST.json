@@ -19,9 +19,9 @@
   },
   "note": "update/重编译前比对 published_hashes；检测到本地手改不得静默覆盖",
   "bundle_id": "bundle.behavioral-game-theory",
-  "bundle_sha256": "273095362dcd909967989ff7883165aba5bcc602b3c9ebc7b796d607f9925830",
+  "bundle_sha256": "1bfb37cdc500243faa8ffbd442dd5e504bc6c1f7655076f36aae081d51a6f80e",
   "variant": "single",
-  "run_id": "run-20261028-112016-d4a3fb",
+  "run_id": "run-20261028-211246-33e6ea",
   "decision": {
     "schema_version": 1,
     "requested": "single",

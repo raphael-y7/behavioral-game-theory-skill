@@ -1,5 +1,5 @@
 ---
-name: behavioral-game-router
+name: behavioral-game-theory-skill-router
 description: |
   行为博弈论能力路由入口：按问题类型（社会性偏好/首轮行为/学习演化/均衡筛选/信号/声誉/进入/谈判/研究审计）定位到对应能力卡执行；未晋级能力（声誉机制、讨价还价预测、研究审计）经此入口访问。
 metadata:

@@ -1,0 +1,312 @@
+schema_version: 1
+bundle_id: bundle.behavioral-game-theory
+book:
+  title: 行为博弈：对策略互动的实验研究
+  author: 〔美〕科林·凯莫勒（Colin F. Camerer）著，贺京同等译
+  source_pack: 行为博弈_合并转写稿.md
+  baseline_tag: behavioral-game-theory
+entry:
+  name: behavioral-game-theory-skill
+  description: 用行为博弈论的实验结论与可计算模型分析策略互动问题（含股票投资场景中的对手行为、公司信号、拥挤与共识）。涵盖：社会性偏好测度与FS/互惠计算、认知等级与首轮行为预测（CH/QRE）、EWA学习建模、协调博弈均衡筛选（聚点/风险占优）、信号传递判读（含企业融资）、市场进入与拥挤、声誉机制、讨价还价预测、行为研究方法论审计。以第9章"模型选型菜谱"为总路由。
+  core_principles:
+    - 自利是特例：他人所得真实进入效用函数，可用 FS(α,β) 或互惠模型参数化
+    - 人是"一步半的思考者"：首轮行为由泊松认知等级(τ≈1.5)主导，QRE 给理性程度定价
+    - 均衡概念对动态零解释力：重复互动的演化用 EWA/fEWA 更新规则建模
+    - 多重均衡的筛选有可辨识原则：三分类（匹配/猎鹿/性别战）+ 聚点 + 风险占优度量
+    - 信号的价值在成本不对称；弱精炼够用，强精炼在数据面前失灵
+    - 修正而非抛弃：保留策略互动框架，替换自利/无限推理/静态均衡三个假设
+    - 默认参数是"零卡路里菜谱"（FS α=1/3、CH τ=1.5、fEWA λ=1），换场景必须重估
+  out_of_scope:
+    - 单人不涉及策略互动的普通决策与心理自助
+    - 已由长期市场选择充分塑造的稳态价格预测（实验室规律外推边界）
+    - 纯技术分析、财务报表分析与估值建模（非本书主题）
+    - 统计审查（样本量、功效、多重比较——原书未覆盖的方法论纪律）
+  stop_conditions:
+    - 问题不含策略互动（对手反应不影响结果）时停止并说明
+    - 缺少关键结构参数（支付/容量/贴现因子/类型先验）且用户无法提供时，输出定性方向并声明缺口，不得臆造数值
+    - 需要逐笔投资建议时停止——本技能提供行为分析视角，不构成投资建议
+router_entry:
+  name: behavioral-game-theory-skill-router
+  description: 行为博弈论能力路由入口：按问题类型（社会性偏好/首轮行为/学习演化/均衡筛选/信号/声誉/进入/谈判/研究审计）定位到对应能力卡执行；未晋级能力（声誉机制、讨价还价预测、研究审计）经此入口访问。
+promotion_budget: 8
+capabilities:
+  - capability_id: cap.behavioral-game-theory.model-recipe-selection
+    revision: 1
+    status: active
+    slug: model-recipe-selection
+    title: 模型选型菜谱（行为博弈论总路由）
+    importance: critical
+    importance_rationale: 对应 task-01（模型选择），BOOK_OVERVIEW 优先级第1位；作者原版总决策框架（第9章菜谱段 f632/f101/p643-645 正典），所有其他能力卡的入口
+    one_liner: 先判问题类型（偏好/首轮/学习），再取对应模型+默认参数+替代方案
+    intents: [选择行为博弈模型, 判断用哪个博弈论框架, 策略互动问题建模选型, model selection for strategic interaction]
+    keywords: [模型选型, 菜谱, 博弈模型, 何时用什么模型, recipe, Camerer, 行为博弈]
+    also_read: [cap.behavioral-game-theory.social-preference-measure, cap.behavioral-game-theory.cognitive-hierarchy-first-round, cap.behavioral-game-theory.ewa-learning-model]
+    card: cards/model-recipe-selection.md
+    frontmatter:
+      description: |
+        用户面对策略互动问题不知道用哪个博弈论/行为模型切入时的总路由：按"社会性偏好/首轮行为/学习演化/均衡筛选/信号/声誉/进入/谈判"八类定位到对应能力卡，并给出各分支的默认参数（FS α=1/3、CH τ=1.5、fEWA λ=1）与替代模型。语言信号：该用哪个模型、有没有现成框架、博弈论怎么分析X。不适用于：单人不涉及互动的决策、只要具体数值计算（直接走对应专业卡）、非互动的技术分析问题。trigger: model selection, 博弈模型选型, behavioral game theory recipe.
+      tags: [decision, routing, mental-model]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第9章 9.1.7 菜谱段与 9.1 总结
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 三分支路由契约完整、公式与默认参数齐备、与其他卡互为路由与被路由关系，五判据全过。
+  - capability_id: cap.behavioral-game-theory.social-preference-measure
+    revision: 1
+    status: active
+    slug: social-preference-measure
+    title: 社会性偏好测度与计算（FS/互惠）
+    importance: high
+    importance_rationale: 对应 task-02+task-11（coverage-audit 无缺口项）；第9章称社会性偏好模型纳入主流"无论怎样强调都不为过"；FS 公式+三大测度博弈是全书引用最密的工具族（f105/f106/f127/p163/p101 等 40+ verified）
+    one_liner: 用独裁者/最后通牒/信任博弈测偏好，用 FS 函数把"在意差距"算进效用再重求均衡
+    intents: [分析公平与互惠行为, 计算社会性效用, 预测对方是否拒绝要约, 评估激励是否被公平感扭曲, fairness reciprocity analysis]
+    keywords: [社会性偏好, 规避不均等, FS, 互惠, 最后通牒, 独裁者博弈, 信任博弈, ultimatum, fairness]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.bargaining-prediction]
+    card: cards/social-preference-measure.md
+    frontmatter:
+      description: |
+        当问题是"人们是否/如何在意他人所得"时使用：三博弈测度组合（独裁者测利他、最后通牒测消极互惠、信任博弈测信任与值得信任）+ FS 规避不均等公式 U_i=x_i−(α/(n−1))Σmax(x_k−x_i,0)−(β/(n−1))Σmax(x_i−x_k,0) 重求行为预测。经验锚点：最后通牒出价40-50%、≤20%约半拒、独裁给予10-20%、信任投资约半、积极互惠弱于消极互惠。语言信号：公平、报复、消费者觉得被宰、激励挤出、 Ultimatum/fairness。不适用于：纯自利假设成立的市场出清价、推理深度问题（归 CH 卡）、谈判流程（归谈判卡）。trigger: social preference, 规避不均等, 互惠.
+      tags: [calculation, social-preference, measurement]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第2章 2.1-2.9（式2.8.1及2.8族）、第9章 9.1.1
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 公式与测度流程完整可执行（V2 数值演练通过），任务锚点数据齐备。
+  - capability_id: cap.behavioral-game-theory.cognitive-hierarchy-first-round
+    revision: 1
+    status: active
+    slug: cognitive-hierarchy-first-round
+    title: 认知等级与首轮行为预测（CH/QRE）
+    importance: high
+    importance_rationale: 对应 task-03；"二至三步推理"是全书最稳定的跨博弈规律（9.1.4），CH 泊松公式是第9章菜谱分支B（f317/p337/p209/f302/f306/f320/f321 等 30+ verified）
+    one_liner: 人群按泊松 τ≈1.5 分层逐步推理，预测首轮落点用 CH 加权，理性程度用 QRE 的 λ 定价
+    intents: [预测首轮行为, 估计市场第一反应, 判断对手想几步, 预测新博弈新规则下的初始选择, level-k reasoning, first-round prediction]
+    keywords: [认知等级, CH, 泊松, QRE, 选美比赛, 推理步数, 有限推理, beauty contest, level-k]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.ewa-learning-model, cap.behavioral-game-theory.coordination-selection]
+    card: cards/cognitive-hierarchy-first-round.md
+    frontmatter:
+      description: |
+        预测"第一次博弈/新环境下人们怎么选"：CH 模型按 f(k|τ)=e^(−τ)τ^k/k!（泊松，τ 默认1.5）分层，k 级对低级分布最优反应，加权得首轮落点；QRE 用 P=e^(λy)/Σe^(λy) 给整张概率分布定理性度（λ=0.25-3.2）。经验锚点：选美中位数2步、二至四级各≥10%、CEO与报读者也只0-3级。语言信号：第一反应、开局、几步推理、level-k、beauty contest。不适用于：重复多期演化（归 EWA 卡）、均衡筛选（归协调卡）、把均衡解0当人群预测。trigger: cognitive hierarchy, 首轮预测, level-k, QRE.
+      tags: [calculation, prediction, reasoning]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第5章 5.2/5.6-5.7（式5.6.1/5.7.3）、第9章 9.1.4 与菜谱
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 泊松公式与逐级最优反应可独立执行（V2 演练：τ=1.5→f(0)=0.223/f(1)=0.335/f(2)=0.251）。
+  - capability_id: cap.behavioral-game-theory.ewa-learning-model
+    revision: 1
+    status: active
+    slug: ewa-learning-model
+    title: EWA 学习建模（含机制辨识）
+    importance: high
+    importance_rationale: 对应 task-04+task-12；第6章为全书技术核心（f416/f419/f402/p419/p421-431 等 45+ verified）；学习理论是"均衡概念零解释力"问题的作者主推答案
+    one_liner: 吸引力 A 与权重 N 按 φ/δ/κ 三参数更新，δ=0 退化强化、δ=1 退化信念学习，fEWA 把参数函数化到只剩 λ
+    intents: [建模重复互动中的行为演化, 分析学习速度与适应, 判断对手在跟风还是在计算, reinforcement learning modeling, EWA]
+    keywords: [EWA, 学习模型, 强化学习, 信念学习, 虚拟行动, fEWA, 模仿学习, direction learning, 老练]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.cognitive-hierarchy-first-round, cap.behavioral-game-theory.signal-reading]
+    card: cards/ewa-learning-model.md
+    frontmatter:
+      description: |
+        当问题是"随重复交互行为如何变"时使用：EWA 核心更新 N(t)=φN(t−1)+1，A 按[δ+(1−δ)I]·π 加权支付更新，Logit 映射选择概率；δ=0/κ=1=累积强化、δ=1/κ=0=加权虚拟行动；fEWA 用变化探测 φ_i(t) 与基尼系数 κ_i(t) 函数化参数（λ=1）。含机制辨识三判据（信息条件法）与模仿回归判别。语言信号：学习效应、越来越熟练、适应速度、跟风还是计算、EWA/reinforcement。不适用于：首轮落点（归 CH 卡）、声誉类型信念（归声誉卡）、均衡筛选。引用表值前回查原表（needs-review）。trigger: EWA, learning model, 学习建模.
+      tags: [calculation, dynamics, learning]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第6章 6.2-6.9（式6.6.1-6.6.4、表6-21/6-24）、第9章 9.1.5 与菜谱
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 更新公式可独立执行（V2 演练：N(1)=1.9、A(1)≈2.526）；作者立场偏向已入 B 段。
+  - capability_id: cap.behavioral-game-theory.coordination-selection
+    revision: 1
+    status: active
+    slug: coordination-selection
+    title: 协调博弈与均衡筛选（聚点/风险占优）
+    importance: high
+    importance_rationale: 对应 task-05；多重均衡筛选机制同时解释路径依赖/市场采纳/企业文化（第7章 7.6），迁移面最宽（f502/f520/p524/p518/f503 等 35+ verified）
+    one_liner: 先三分类（匹配/猎鹿/性别战），再按聚点原则、风险度量（闪点0.67-0.75）与交流/指定/时序判据筛选均衡
+    intents: [判断哪个均衡标准会胜出, 分析共识与题材形成, 评估路径依赖与锁定, 预判集体行动能否启动, equilibrium selection, focal point]
+    keywords: [协调博弈, 聚点, 风险占优, 支付占优, 猎鹿, 性别战, 路径依赖, 市场采纳, 企业文化, focal point, lock-in]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.market-entry-dynamics, cap.behavioral-game-theory.cognitive-hierarchy-first-round]
+    card: cards/coordination-selection.md
+    frontmatter:
+      description: |
+        当问题是"多个均衡/标准/平台/叙事哪个会被选中"时使用：三分类定不确定性来源（匹配→聚点原则族；猎鹿→风险占优度量Σ偏离损失平方 vs 闪点 p≈0.67-0.75；性别战→交流/指定/时序判据），跨期用正向归纳修正，并迁移解释路径依赖、市场采纳与企业文化（分水岭实验：初始0.6 vs 1.12美元锁定终态）。语言信号：哪个标准胜出、共识、路径依赖、能不能形成、lock-in/focal point。不适用于：人数vs容量问题（归进入卡）、首轮落点（归CH卡）。风险占优≠风险厌恶、猎鹿≠囚徒困境（易失真概念）。trigger: coordination, equilibrium selection, 聚点, 路径依赖.
+      tags: [decision, coordination, framework]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第7章 7.1-7.6（表7-20~7-27）、第9章 9.1.6
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 三分类+量化风险度量+原则族构成完整筛选契约；宏观迁移案例齐备。
+  - capability_id: cap.behavioral-game-theory.signal-reading
+    revision: 1
+    status: active
+    slug: signal-reading
+    title: 信号传递判读（含企业融资信号）
+    importance: high
+    importance_rationale: 对应 task-06，BOOK_OVERVIEW 投资蒸馏优先级第2位；第8章 8.2.2 有直接的公司融资信号实验（f611/p616/f603/f605/f613/f610/f616 等 25+ verified）
+    one_liner: 信号必须"某些类型承受得起、另一些过于昂贵"；均衡识别后按弱精炼筛选，强精炼失灵
+    intents: [解读公司公告的信息含量, 判断增发回购股利信号, 评估声明可信度, 识别虚张声势, signaling, costly signal]
+    keywords: [信号传递, 昂贵信号, 分离均衡, 混同均衡, 直觉标准, 精炼, Myers-Majluf, 棘轮效应, 限制性定价, signaling]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.reputation-mechanism, cap.behavioral-game-theory.ewa-learning-model]
+    card: cards/signal-reading.md
+    frontmatter:
+      description: |
+        当问题是"一方行为传递了什么私人信息"时使用：可信性双属性初检（承受得起/过于昂贵）→均衡类型识别（分离/混同/半分离+贝叶斯定价）→精炼阶梯筛选（直觉标准→神性→…，支持率递减，弱精炼够用）。企业应用：Myers-Majluf 融资均衡判别式（好公司因信号成本搁浅好项目的混同陷阱）、棘轮效应、游说与限制性定价。语言信号：这个公告说明什么、信号、增发好坏、能不能信、说大话。不适用于：跨期类型概率积累（归声誉卡）、协调工具性宣告（归协调卡）。混同均衡里"好公司增发=坏消息"是结构结果非市场非理性。trigger: signaling, 信号传递, costly signal, 增发信号.
+      tags: [decision, signaling, corporate]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第8章 8.1-8.2（表8-1~8-12）、第9章 9.1.7
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 判别式本体可执行（V2 演练：盈亏平衡 q=0.36、阈值 0.68 复核成立）；半分离比例式排印混乱已注 needs-review。
+  - capability_id: cap.behavioral-game-theory.market-entry-dynamics
+    revision: 1
+    status: active
+    slug: market-entry-dynamics
+    title: 市场进入与拥挤判断
+    importance: high
+    importance_rationale: 对应 task-08；进入公式+基准组群忽视是"赛道拥挤"判断的直接工具（p518/p523/f515/f516/f518/c33 等 12+ verified），BOOK_OVERVIEW 优先级第8位但投资场景命中率高
+    one_liner: 算均衡进入人数与概率，再按"方差缩小+基准组群忽视"两修正预判拥挤与整体亏损
+    intents: [判断赛道拥挤度, 分析产能扩张与进入潮, 评估机会剩余空间, market entry, crowding]
+    keywords: [市场进入, 拥挤, 容量, 进入壁垒, 产能战, 过度自信, crowding, entry game]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.coordination-selection, cap.behavioral-game-theory.cognitive-hierarchy-first-round]
+    card: cards/market-entry-dynamics.md
+    frontmatter:
+      description: |
+        当问题是"多少人会涌入一个有容量上限的机会"时使用：收益 k+r(c−m)、m=Σe_j 的均衡基准 → 行为修正（进入方差远小于混合均衡预测；自我选择下基准组群忽视致 70% 期数群体亏损）→ 多期修复条件。田野镜像：500亿美元光缆泡沫、80%新餐馆一年倒闭。语言信号：赛道还能进吗、挤破头、容量过剩、拥挤交易、crowding/entry。不适用于：标准之争（归协调卡）、对手推理深度（归CH卡）。结论是"边际进入者整体亏损"而非"行业无利可图"。trigger: market entry, 拥挤, crowding, 进入博弈.
+      tags: [decision, competition, calculation]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第7章 7.3（表7-18 五项研究汇总）、第9章
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 公式可执行（V2 演练：p*≈0.105、期望2.1人）；行为修正有实验支撑。
+  - capability_id: cap.behavioral-game-theory.reputation-mechanism
+    revision: 1
+    status: active
+    slug: reputation-mechanism
+    title: 声誉机制与承诺可信度
+    importance: medium
+    importance_rationale: 对应 task-07（coverage-audit 无缺口）；τ^n 零参数预测是本书亮点（f617/p625-626/f619/f621/f618/c39 等 15+ verified），但与信号卡触发相邻，按预算降为 router 卡
+    one_liner: 声誉=类型概率的贝叶斯积累与消耗：阈值路径逐期前移，一次拖欠永久失格
+    intents: [评估管理层信用记录价值, 判断承诺可信度, 分析惩罚制度设计, reputation, track record]
+    keywords: [声誉, 承诺, 信用, 贝叶斯类型, 威慑, reputation, commitment]
+    also_read: [cap.behavioral-game-theory.signal-reading, cap.behavioral-game-theory.model-recipe-selection]
+    card: cards/reputation-mechanism.md
+    frontmatter:
+      description: |
+        当问题是"跨期互动中类型概率如何建立/维持/消耗"时使用：借者-贷者范式（先验+阈值路径 τ^n，τ≈0.786 贷例）+ 三基本效应（先验定年限、短博弈近诚实、长博弈多投资）+ 自生先验修正。声誉=类型概率的贝叶斯结构而非道德口碑；一次违约=后验跳变永久失格。语言信号：信用记录、track record、敢不敢违约、承诺可信吗。不适用于：单期信号（归信号卡）、策略吸引力的学习（归EWA卡）。trigger: reputation, 声誉机制, 承诺可信度.
+      tags: [decision, trust, dynamics]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第8章 8.3（表8-19~8-27）、第4章 4.1 外生声誉实验
+    promotion:
+      destination: router
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: false
+      notes: 后2条判据仅 reuse 通过（eval 难写无歧义断言）；与 signal-reading 触发相邻，按软预算降为 router 卡，经路由入口可达不失联。
+  - capability_id: cap.behavioral-game-theory.bargaining-prediction
+    revision: 1
+    status: active
+    slug: bargaining-prediction
+    title: 讨价还价结果预测
+    importance: medium
+    importance_rationale: 对应 task-09（coverage-audit 无缺口）；deal-me-out 判据有干净实验裁定（f228/p245/p246 等 20+ verified），与 social-preference 卡触发相邻降为 router
+    one_liner: 结果落在"均分↔精炼预测"区间；外部选择低于 δ/(1+δ)×饼则出局（deal-me-out）
+    intents: [预测谈判落点, 判断BATNA重要性, 设计谈判时序, bargaining prediction, BATNA]
+    keywords: [讨价还价, 谈判, 外部选择, 贴现因子, deal-me-out, 僵局, bargaining]
+    also_read: [cap.behavioral-game-theory.social-preference-measure, cap.behavioral-game-theory.model-recipe-selection]
+    card: cards/bargaining-prediction.md
+    frontmatter:
+      description: |
+        当问题是"这场谈判会落在哪"时使用：先算轮流出价 SPE（δ/(1+δ)），再套外部选择三分法（<δ/(1+δ)×饼→deal-me-out 出局；高且威胁可信→计入；外生强制→例外），最后行为修正为"均分↔精炼"区间（公平偏好拉向均分、截止期效应、两轮截断启发式、自利偏向双向错位）。语言信号：能谈到多少、BATNA、筹码、会谈崩吗。不适用于：零和投机盘（无谈判伙伴）、公平效用的具体计算（归社会偏好卡）。译本 δ/(1−δ) 为排印错误一律用 δ/(1+δ)。trigger: bargaining, 谈判预测, deal-me-out.
+      tags: [decision, negotiation]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第4章 4.1-4.4（图4-4、表4-1/4-2）、第9章 9.1.3
+    promotion:
+      destination: router
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: false
+      notes: 后2条判据仅 reuse 通过；核心判据与 social-preference（公平修正）在真实调用中常同时需要，router 合并触发更稳。
+  - capability_id: cap.behavioral-game-theory.experiment-methodology-audit
+    revision: 1
+    status: active
+    slug: experiment-methodology-audit
+    title: 行为实验研究审计
+    importance: medium
+    importance_rationale: 对应 task-10；"先读方法再读结果"是第2章 2.2 全节的方法论纪律（f104/f110-118/f121/p124-126/x18-26 等 20+ verified），为元方法按 router 处理
+    one_liner: 过五因素清单（激励/匹配重复/匿名蒙蔽/描述语境/结构），反直觉结果按"重复→奖金→匿名→描述"四步归因
+    intents: [评估行为研究可信度, 审查实验证据, 设计小实验验证行为假设, audit behavioral research]
+    keywords: [实验方法论, 需求效应, 激励相容, 双盲, 方法论审计, methodology audit]
+    also_read: [cap.behavioral-game-theory.model-recipe-selection, cap.behavioral-game-theory.social-preference-measure]
+    card: cards/experiment-methodology-audit.md
+    frontmatter:
+      description: |
+        当需要判断"实验表明……"式结论可不可信时使用：五因素体检（真金白银激励/匹配与重复/匿名与需求效应/描述框架/结构控制）→反直觉结果四步归因（重复→奖金→匿名→描述）→外推边界声明。核心纪律：先读方法再读结果；审计目标是定边界不是找茬（多数核心规律控制后仍成立）。语言信号：这研究靠谱吗、样本影响、需求效应、能不能这么推。不适用于：统计审查（样本量功效）、产出行为预测。trigger: methodology audit, 实验审计, 研究可信度.
+      tags: [checklist, methodology, evaluation]
+    source_evidence:
+      - source_id: behavioral-game-theory
+        location: 第1章 1.3（附录A1.2）、第2章 2.2（表2-2~2-4）
+    promotion:
+      destination: router
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 判据可全过，但作为元方法其调用总是伴随专业卡使用，按"最少入口覆盖最多意图"原则经路由入口提供。

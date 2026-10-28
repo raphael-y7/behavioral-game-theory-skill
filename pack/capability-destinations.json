@@ -1,49 +1,49 @@
 {
   "generated_by": "cangjie-tools v2.5.0",
   "bundle_id": "bundle.behavioral-game-theory",
-  "router_entrypoint": "behavioral-game-router",
+  "router_entrypoint": "behavioral-game-theory-skill-router",
   "entrypoint_count": 8,
   "capability_count": 10,
   "destinations": {
     "cap.behavioral-game-theory.model-recipe-selection": {
       "promoted_to": "model-recipe-selection",
-      "router_view": "behavioral-game-router/references/capabilities/model-recipe-selection.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/model-recipe-selection.md"
     },
     "cap.behavioral-game-theory.social-preference-measure": {
       "promoted_to": "social-preference-measure",
-      "router_view": "behavioral-game-router/references/capabilities/social-preference-measure.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/social-preference-measure.md"
     },
     "cap.behavioral-game-theory.cognitive-hierarchy-first-round": {
       "promoted_to": "cognitive-hierarchy-first-round",
-      "router_view": "behavioral-game-router/references/capabilities/cognitive-hierarchy-first-round.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/cognitive-hierarchy-first-round.md"
     },
     "cap.behavioral-game-theory.ewa-learning-model": {
       "promoted_to": "ewa-learning-model",
-      "router_view": "behavioral-game-router/references/capabilities/ewa-learning-model.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/ewa-learning-model.md"
     },
     "cap.behavioral-game-theory.coordination-selection": {
       "promoted_to": "coordination-selection",
-      "router_view": "behavioral-game-router/references/capabilities/coordination-selection.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/coordination-selection.md"
     },
     "cap.behavioral-game-theory.signal-reading": {
       "promoted_to": "signal-reading",
-      "router_view": "behavioral-game-router/references/capabilities/signal-reading.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/signal-reading.md"
     },
     "cap.behavioral-game-theory.market-entry-dynamics": {
       "promoted_to": "market-entry-dynamics",
-      "router_view": "behavioral-game-router/references/capabilities/market-entry-dynamics.md"
+      "router_view": "behavioral-game-theory-skill-router/references/capabilities/market-entry-dynamics.md"
     },
     "cap.behavioral-game-theory.reputation-mechanism": {
-      "served_by": "behavioral-game-router",
-      "card": "behavioral-game-router/references/capabilities/reputation-mechanism.md"
+      "served_by": "behavioral-game-theory-skill-router",
+      "card": "behavioral-game-theory-skill-router/references/capabilities/reputation-mechanism.md"
     },
     "cap.behavioral-game-theory.bargaining-prediction": {
-      "served_by": "behavioral-game-router",
-      "card": "behavioral-game-router/references/capabilities/bargaining-prediction.md"
+      "served_by": "behavioral-game-theory-skill-router",
+      "card": "behavioral-game-theory-skill-router/references/capabilities/bargaining-prediction.md"
     },
     "cap.behavioral-game-theory.experiment-methodology-audit": {
-      "served_by": "behavioral-game-router",
-      "card": "behavioral-game-router/references/capabilities/experiment-methodology-audit.md"
+      "served_by": "behavioral-game-theory-skill-router",
+      "card": "behavioral-game-theory-skill-router/references/capabilities/experiment-methodology-audit.md"
     }
   }
 }
