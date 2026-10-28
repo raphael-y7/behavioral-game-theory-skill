@@ -128,8 +128,16 @@ behavioral-game-theory-skill/
 ├── README.en.md                   ← you are reading this
 ├── LICENSE                        ← MIT
 ├── BOOK_OVERVIEW.md               ← whole-book comprehension (Adler four-step, stage 0 output)
+├── CANGJIE_ADAPTATION.md          ← adaptation notes: text state, distillation goals, evidence rules, boundaries
+├── TEST_SUMMARY.md                ← stage 4 stress-test summary (scope, structure checks, results, next steps)
 ├── verified.md                    ← triple-verification statistics and adjudications (stage 1.5)
 ├── INDEX.md                       ← skill map: capability table, dependencies, loading order
+├── candidates/                    ← stage 1 candidate pool (659 raw extraction records, kept for traceability)
+│   ├── frameworks.md              ← 203 framework candidates (5 groups merged)
+│   ├── principles.md              ← 329 principle candidates (6 groups merged)
+│   ├── cases.md                   ← 44 case candidates
+│   ├── counter-examples.md        ← 35 counter-example candidates
+│   └── glossary.md                ← 48 glossary candidates
 ├── bundle/                        ← build source: canonical copies of the 10 cards
 │   ├── verified.yaml              ← metadata, criteria and promotion verdicts for the 10 cards
 │   ├── cards/                     ← 10 capability cards (R/I/A1/A2/E/B sections)
@@ -140,6 +148,7 @@ behavioral-game-theory-skill/
 │   └── behavioral-game-theory-skill/
 │       ├── SKILL.md               ← entry: triggers + routing table + loading rules
 │       ├── BUILD_MANIFEST.json    ← build manifest and file hashes
+│       ├── test-prompts.json      ← entry-level trigger and boundary cases (shipped for post-install regression)
 │       └── references/
 │           ├── overview.md
 │           ├── capability-index.md  ← full intent and keyword index

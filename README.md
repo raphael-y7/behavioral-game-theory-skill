@@ -128,8 +128,16 @@ behavioral-game-theory-skill/
 ├── README.en.md                   ← English version
 ├── LICENSE                        ← MIT
 ├── BOOK_OVERVIEW.md               ← 整书理解（Adler 四步拆解，阶段 0 产出）
+├── CANGJIE_ADAPTATION.md          ← 仓颉适配说明：文本状态、蒸馏目标、证据规则、使用边界
+├── TEST_SUMMARY.md                ← 阶段 4 压力测试摘要（范围、结构检查、结果、后续动作）
 ├── verified.md                    ← 三重验证的统计与裁定记录（阶段 1.5 产出）
 ├── INDEX.md                       ← Skill 地图：能力总表 + 依赖关系 + 加载顺序
+├── candidates/                    ← 阶段 1 候选池（659 条原始提取清单，供溯源）
+│   ├── frameworks.md              ← 框架候选 203 条（5 组合并）
+│   ├── principles.md              ← 原则候选 329 条（6 组合并）
+│   ├── cases.md                   ← 案例候选 44 条
+│   ├── counter-examples.md        ← 反例候选 35 条
+│   └── glossary.md                ← 术语候选 48 条
 ├── bundle/                        ← 编译源：10 张能力卡的规范副本
 │   ├── verified.yaml              ← 10 张卡的元数据、判据、晋级结论
 │   ├── cards/                     ← 10 张能力卡（R/I/A1/A2/E/B 六段）
@@ -140,6 +148,7 @@ behavioral-game-theory-skill/
 │   └── behavioral-game-theory-skill/
 │       ├── SKILL.md               ← 入口：触发条件 + 路由表 + 加载规则
 │       ├── BUILD_MANIFEST.json    ← 编译清单与文件哈希
+│       ├── test-prompts.json      ← 入口级触发与边界用例（随包分发，便于装机后回归）
 │       └── references/
 │           ├── overview.md
 │           ├── capability-index.md  ← 完整意图与关键词索引
