@@ -234,4 +234,5 @@ All numeric criteria in the book (the FS α/β values, the CH Poisson τ, the fE
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](./LICENSE)
+
