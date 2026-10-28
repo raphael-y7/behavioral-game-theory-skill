@@ -1,0 +1,48 @@
+{
+  "tool": "cangjie-tools v2.5.0",
+  "published_hashes": {
+    "behavioral-game-router\\references\\capabilities\\bargaining-prediction.md": "7a40575162ea53667e165f58d8fac0d0ead6fde53ba591d50afcc807174b141a",
+    "behavioral-game-router\\references\\capabilities\\cognitive-hierarchy-first-round.md": "5975ae042af9ace9773a2803280e80699615995c945c89c0fbf26094ffb8eee6",
+    "behavioral-game-router\\references\\capabilities\\coordination-selection.md": "560f37bb19b657f0533b60991a7ebd0d290008de1bfbdd7c3871813a8782b534",
+    "behavioral-game-router\\references\\capabilities\\ewa-learning-model.md": "9ad7013e90b7568d0a9609ac971fcdfa09b7fc9d5c50123b6d098e38e226600a",
+    "behavioral-game-router\\references\\capabilities\\experiment-methodology-audit.md": "9e6eab155e5e338dab10779461a7d33bcc89849bf5b32b67ab54b74ec338205c",
+    "behavioral-game-router\\references\\capabilities\\market-entry-dynamics.md": "13819b244bd1dae0cb17ea25bc966676c23db5d662a9d59933a5aa35003c41fd",
+    "behavioral-game-router\\references\\capabilities\\model-recipe-selection.md": "f155e097ceacf2e0e5815b354da0f8611315f72516a66e513f31e28b89b491be",
+    "behavioral-game-router\\references\\capabilities\\reputation-mechanism.md": "8a706f68d11cc3b0abef4a7887dca148f6084e68a6f75eea9c6554c3621f0c88",
+    "behavioral-game-router\\references\\capabilities\\signal-reading.md": "25a5b1d21e205439507457ec518f59f9c317ac49d8f7d03acd42e1e47fe5de3d",
+    "behavioral-game-router\\references\\capabilities\\social-preference-measure.md": "f33b641c0f3523979f5ba57b297ef6179e8fb9f196032efe44ec5a2684c52c23",
+    "behavioral-game-router\\references\\capability-index.md": "61adcddc64bd87b06ecd1b7a42cdd55777d4006c5e2fa385da496ccdb01e7cce",
+    "behavioral-game-router\\references\\cheatsheet.md": "d0fb533471d4ddc0c4b4f19dd53db51057ff5891c809151f0c63b859eafb9763",
+    "behavioral-game-router\\references\\glossary.md": "de684d3e5738c255ff43e54f398b69f7e68eea549487e9567f0230407b24be46",
+    "behavioral-game-router\\references\\overview.md": "dfe4492a74c4907f78fcbe0c964107694a65b5d576cffd70302d0069547fabad",
+    "behavioral-game-router\\SKILL.md": "46a75090c9f4577892ea09346cb0ae4c2b241471b02c3f70315a70aededa3a08",
+    "capability-destinations.json": "aea16fc24d186928eeddca68e716e7b4515d4092129dae9b6c893c16af6c9f85",
+    "cognitive-hierarchy-first-round\\SKILL.md": "a4edcf1845379a411ab7b9c483b171649263865759c423f37e76f4658509ecea",
+    "coordination-selection\\SKILL.md": "5a827f600dee72adac5e465ef90d7b099fa7bc7a06cbbd2c2efb7efe2444b020",
+    "ewa-learning-model\\SKILL.md": "0ac83b1af08547a4bdeaf06153e1cfd219f441e071d4bb5c4ec76ac7dd782189",
+    "market-entry-dynamics\\SKILL.md": "46cfe5b0a10d7b429574a8f91c5ad67799afb6be8e88648ca11e4f20734c914f",
+    "model-recipe-selection\\SKILL.md": "c48d5a8f39777b4a8518139ce4c8ef889459ad4920d74aa3dea2d692098326e2",
+    "signal-reading\\SKILL.md": "8491576d073e099933594a8dde48fd0f9f6c5512380d5cb144a17840e798e52c",
+    "social-preference-measure\\SKILL.md": "6bb04fbfbb8c03dc72d50fb16a6db8742fc9c0c371c2db3da49a136047430756"
+  },
+  "note": "update/重编译前比对 published_hashes；检测到本地手改不得静默覆盖",
+  "bundle_id": "bundle.behavioral-game-theory",
+  "bundle_sha256": "273095362dcd909967989ff7883165aba5bcc602b3c9ebc7b796d607f9925830",
+  "variant": "pack",
+  "run_id": "run-20261028-112017-93f005",
+  "decision": {
+    "schema_version": 1,
+    "requested": "pack",
+    "selected": "pack",
+    "decision_policy": "single-first-v1",
+    "skill_budget": 8,
+    "promoted_count": 7,
+    "capability_count": 10,
+    "reasons": [
+      "用户显式选择 pack，auto 决策器不覆盖用户选择"
+    ],
+    "alternative": "single（1 个入口 + 10 张内部能力卡）",
+    "user_confirmed": true,
+    "preserve_strategy_on_update": true
+  }
+}
