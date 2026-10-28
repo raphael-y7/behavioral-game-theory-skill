@@ -1,0 +1,22 @@
+{
+  "skill": "model-recipe-selection",
+  "version": "1.0.0",
+  "note": "分技能触发测试：用例从入口级套件 single/behavioral-game-theory-skill/test-prompts.json 摘录——expected_behavior 指向本 skill 的用例 + 全部负例（诱饵与跨技能混淆），用例原文与判定标准未改。盲测时只给 sub-agent entries 列表与 prompt，不给 type/expected/notes。",
+  "entries": [
+    {"name": "behavioral-game-theory-skill-router", "description": "行为博弈论能力路由入口：按问题类型（社会性偏好/首轮行为/学习演化/均衡筛选/信号/声誉/进入/谈判/研究审计）定位到对应能力卡执行；声誉机制、讨价还价预测、研究审计经此访问。"},
+    {"name": "model-recipe-selection", "description": "用户面对策略互动问题不知道用哪个博弈论/行为模型切入时的总路由：按问题类型定位到对应能力卡并给出默认参数（FS α=1/3、CH τ=1.5、fEWA λ=1）与替代模型。"},
+    {"name": "social-preference-measure", "description": "当问题是'人们是否/如何在意他人所得'时使用：三博弈测度组合+FS 规避不均等公式重求行为预测。语言信号：公平、报复、消费者觉得被宰、激励挤出。"},
+    {"name": "cognitive-hierarchy-first-round", "description": "预测'第一次博弈/新环境下人们怎么选'：CH 模型泊松分层（τ 默认1.5）+QRE 定理性度。语言信号：第一反应、开局、几步推理。"},
+    {"name": "ewa-learning-model", "description": "当问题是'随重复交互行为如何变'时使用：EWA 吸引力更新（φ/δ/κ）+机制辨识三判据。语言信号：学习效应、适应速度、跟风还是计算。"},
+    {"name": "coordination-selection", "description": "当问题是'多个均衡/标准/平台/叙事哪个会被选中'时使用：三分类+聚点原则+风险占优度量（闪点0.67-0.75）。语言信号：哪个标准胜出、共识、路径依赖。"},
+    {"name": "signal-reading", "description": "当问题是'一方行为传递了什么私人信息'时使用：可信性双属性→均衡类型识别→精炼阶梯筛选。企业融资信号（增发/回购/股利）。语言信号：这个公告说明什么、能不能信。"},
+    {"name": "market-entry-dynamics", "description": "当问题是'多少人会涌入一个有容量上限的机会'时使用：均衡进入人数基准+方差缩小与基准组群忽视两修正。语言信号：赛道拥挤、产能过剩、挤破头。"}
+  ],
+  "test_cases": [
+    {"id": "edge-03", "type": "edge_case", "prompt": "这支股票的基本面和技术面我都看过了，就是拿不定主意买不买。", "expected_behavior": "不涉及策略互动对手行为时不应强行套用；若用户追问'别人会怎么反应'才进入 model-recipe-selection；直接购买建议应触发 stop_conditions（不构成投资建议）", "notes": "边界：单人决策+投资建议红线"},
+    {"id": "cross-confuse-01", "type": "should_not_trigger_for_signal", "prompt": "我们村去年家家都改用移动支付，今年剩下的几家店也不得不接——没人组织，就这么成了。", "expected_behavior": "这是协调/路径依赖场景，应调 coordination-selection 或 router，而不是 signal-reading（宣告不是信息传递）", "notes": "跨技能混淆诱饵：协调 vs 信号"},
+    {"id": "cross-confuse-02", "type": "should_not_trigger_for_entry", "prompt": "两个团队抢同一个项目，双方都觉得自己方案更好，最后领导选了折中版。为什么大家当初不直接商量好一个方案？", "expected_behavior": "性别战/协调场景，应调 coordination-selection，而不是 market-entry-dynamics（无容量结构）", "notes": "跨技能混淆诱饵：进入 vs 协调"},
+    {"id": "should-not-trigger-01", "type": "should_not_trigger", "prompt": "帮我查一下贵州茅台 2023 年的分红金额。", "expected_behavior": "纯信息查询，不调用任何能力", "notes": "诱饵：信息查询"},
+    {"id": "should-not-trigger-02", "type": "should_not_trigger", "prompt": "帮我写一个周末爬山的时间计划。", "expected_behavior": "无策略互动，不调用", "notes": "诱饵：非互动场景"}
+  ]
+}

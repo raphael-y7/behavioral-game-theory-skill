@@ -113,69 +113,42 @@ Promotion happens after stage 5: 7 of the 10 cards pass all five independence cr
 
 ## Testing and verification
 
-This repository publishes the test material from the generation process alongside the skills: `evals/test-prompts.json` holds the entry-level trigger and boundary cases, and `evals/test-results.md` is the item-by-item scoring log — including the problems found and the stated limitations, not just the passes.
+This repository publishes the test material from the generation process alongside the skills: `test-results.md` is the item-by-item scoring log — including the problems found and the stated limitations, not just the passes; the trigger and boundary cases ship with the skills themselves — the entry-level suite in `single/behavioral-game-theory-skill/test-prompts.json`, and on the pack side `pack/behavioral-game-theory-skill-router/test-prompts.json` plus a same-named file in each promoted skill directory.
 
 - **Trigger blind tests**: a blind agent received only the name and description of the 8 entries plus 12 prompts, with no expected answers; 12 / 12 passed with zero false triggers on decoys (4 negative cases and 2 cross-skill confusion decoys — "coordination ≠ signaling", "coordination ≠ entry")
 - **Reachability**: the 3 router cards (reputation, bargaining, audit) were correctly routed in the blind test, with reasons pointing at the right card — none went missing
 - **Output evaluation**: each of the 10 capability families ran a representative task on new inputs, computed independently from the canonical formulas and checked by mechanical assertions (tolerance 1e-3); 23 / 23 passed — including FS utility, CH Poisson tiers, one-step EWA updating with the δ=0 degeneracy check, the risk-dominance measure, entry probability p*≈0.105 and the deal-me-out share
-- **Known limitation**: this round did **not** run a without_skill baseline, so no claim is made that "with the skill beats without it"; the value claim rests on task mapping and assertion correctness for now, and the baseline is left for a later pass. This is written into `evals/test-results.md` rather than hidden
+- **Known limitation**: this round did **not** run a without_skill baseline, so no claim is made that "with the skill beats without it"; the value claim rests on task mapping and assertion correctness for now, and the baseline is left for a later pass. This is written into `test-results.md` rather than hidden
 
 ## Repository layout
 
 ```text
 behavioral-game-theory-skill/
-├── README.md                      ← Chinese version
-├── README.en.md                   ← you are reading this
-├── LICENSE                        ← MIT
-├── BOOK_OVERVIEW.md               ← whole-book comprehension (Adler four-step, stage 0 output)
-├── CANGJIE_ADAPTATION.md          ← adaptation notes: text state, distillation goals, evidence rules, boundaries
-├── TEST_SUMMARY.md                ← stage 4 stress-test summary (scope, structure checks, results, next steps)
-├── verified.md                    ← triple-verification statistics and adjudications (stage 1.5)
-├── INDEX.md                       ← skill map: capability table, dependencies, loading order
-├── candidates/                    ← stage 1 candidate pool (659 raw extraction records, kept for traceability)
-│   ├── frameworks.md              ← 203 framework candidates (5 groups merged)
-│   ├── principles.md              ← 329 principle candidates (6 groups merged)
-│   ├── cases.md                   ← 44 case candidates
-│   ├── counter-examples.md        ← 35 counter-example candidates
-│   └── glossary.md                ← 48 glossary candidates
-├── bundle/                        ← build source: canonical copies of the 10 cards
-│   ├── verified.yaml              ← metadata, criteria and promotion verdicts for the 10 cards
-│   ├── cards/                     ← 10 capability cards (R/I/A1/A2/E/B sections)
-│   └── book/
-│       ├── overview.md            ← whole-book overview
-│       └── glossary.md            ← glossary
-├── single/                        ← single-entry build
-│   └── behavioral-game-theory-skill/
-│       ├── SKILL.md               ← entry: triggers + routing table + loading rules
-│       ├── BUILD_MANIFEST.json    ← build manifest and file hashes
-│       ├── test-prompts.json      ← entry-level trigger and boundary cases (shipped for post-install regression)
-│       └── references/
-│           ├── overview.md
-│           ├── capability-index.md  ← full intent and keyword index
-│           ├── cheatsheet.md        ← decision-rule quick reference
-│           ├── glossary.md
-│           └── capabilities/        ← 10 capability cards
-├── pack/                          ← multi-entry build (compact pack)
-│   ├── BUILD_MANIFEST.json
-│   ├── capability-destinations.json ← where each of the 10 cards went
-│   ├── behavioral-game-theory-skill-router/
-│   │   ├── SKILL.md               ← source router entry (the 3 router cards are reached here)
-│   │   └── references/
-│   │       ├── overview.md
-│   │       ├── capability-index.md
-│   │       ├── cheatsheet.md
-│   │       ├── glossary.md
-│   │       └── capabilities/       ← card views for all 10 capabilities
-│   ├── model-recipe-selection/SKILL.md
-│   ├── social-preference-measure/SKILL.md
-│   ├── cognitive-hierarchy-first-round/SKILL.md
-│   ├── ewa-learning-model/SKILL.md
-│   ├── coordination-selection/SKILL.md
-│   ├── signal-reading/SKILL.md
-│   └── market-entry-dynamics/SKILL.md
-└── evals/                         ← trigger blind tests and output evaluation
-    ├── test-prompts.json          ← entry-level trigger and boundary cases
-    └── test-results.md            ← item-by-item scoring, issues and limitations
+├── README.md              ← Chinese version
+├── README.en.md           ← you are reading this
+├── LICENSE                ← MIT
+├── BOOK_OVERVIEW.md       ← stage 0 output: Adler whole-book analysis
+├── INDEX.md               ← stage 3 output: skill map + dependencies
+├── verified.md            ← 504 units that passed triple verification
+├── TEST_SUMMARY.md        ← stage 4 output: stress-test summary
+├── CANGJIE_ADAPTATION.md  ← cangjie adaptation notes
+├── GITHUB_REPO.md         ← repository metadata
+├── test-results.md        ← test result records
+├── candidates/            ← stage 1 output: raw candidate pool
+│   ├── frameworks.md      ← framework and method candidates
+│   ├── principles.md      ← principle / rule / calculation candidates
+│   ├── cases.md           ← case candidates from the book
+│   ├── counter-examples.md← counter-example and boundary candidates
+│   └── glossary.md        ← terminology candidates
+├── rejected/              ← stage 1.5 output: rejected units + reasons
+├── bundle/                ← compilation source of truth
+│   ├── verified.yaml      ← capability metadata, criteria and destinations
+│   ├── cards/             ← capability card sources (six sections)
+│   └── book/              ← overview.md + glossary.md
+├── single/                ← single-mode build (one entry + all capability cards)
+│   └── behavioral-game-theory-skill/SKILL.md  ← entry: triggers + routing table + loading rules
+└── pack/                  ← pack-mode build (one router + 7 promoted skills)
+    └── */SKILL.md         ← 8 skills, 6 of which ship a test-prompts.json
 ```
 
 ## Usage

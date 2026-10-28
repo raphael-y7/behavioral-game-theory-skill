@@ -113,69 +113,42 @@ pack 里被晋级为独立 skill 的 7 张卡：
 
 ## 测试与验证
 
-本仓库连生成过程的测试材料一起发布：`evals/test-prompts.json` 是入口级的触发与边界用例，`evals/test-results.md` 是逐项评分结果——包含发现的问题与局限声明，不是只留通过记录。
+本仓库连生成过程的测试材料一起发布：`test-results.md` 是逐项评分结果——包含发现的问题与局限声明，不是只留通过记录；触发与边界用例随 skill 一起分发，入口级套件在 `single/behavioral-game-theory-skill/test-prompts.json`，pack 侧见 `pack/behavioral-game-theory-skill-router/test-prompts.json` 与各晋级 skill 目录下的同名文件。
 
 - **触发盲测**：只给盲测代理 8 个入口的 name+description 与 12 条 prompt，不给预期答案；结果 12 / 12 通过，诱饵误触发 0（其中 4 条负例、2 条"协调 ≠ 信号""协调 ≠ 进入"的跨技能混淆诱饵）
 - **可达性**：3 张 router 卡（声誉、谈判、审计）在盲测中被正确路由，理由也指向正确的卡，没有失联
 - **输出评测**：10 个能力族各执行一组新输入的代表任务，按正典公式独立计算并机械断言（容差 1e-3），23 / 23 通过——例如 FS 效用、CH 泊松分层、EWA 一步更新与 δ=0 退化检验、风险占优度量、进入概率 p*≈0.105、deal-me-out 份额
-- **已知局限**：本轮**未跑** without_skill 基线对照，因此不能声称"有 skill 优于无 skill"；能力价值目前以任务映射与断言正确性为据，基线对照留待后续补齐。这一点写在 `evals/test-results.md` 里，没有隐去
+- **已知局限**：本轮**未跑** without_skill 基线对照，因此不能声称"有 skill 优于无 skill"；能力价值目前以任务映射与断言正确性为据，基线对照留待后续补齐。这一点写在 `test-results.md` 里，没有隐去
 
 ## 仓库结构
 
 ```text
 behavioral-game-theory-skill/
-├── README.md                      ← 你正在看的
-├── README.en.md                   ← English version
-├── LICENSE                        ← MIT
-├── BOOK_OVERVIEW.md               ← 整书理解（Adler 四步拆解，阶段 0 产出）
-├── CANGJIE_ADAPTATION.md          ← 仓颉适配说明：文本状态、蒸馏目标、证据规则、使用边界
-├── TEST_SUMMARY.md                ← 阶段 4 压力测试摘要（范围、结构检查、结果、后续动作）
-├── verified.md                    ← 三重验证的统计与裁定记录（阶段 1.5 产出）
-├── INDEX.md                       ← Skill 地图：能力总表 + 依赖关系 + 加载顺序
-├── candidates/                    ← 阶段 1 候选池（659 条原始提取清单，供溯源）
-│   ├── frameworks.md              ← 框架候选 203 条（5 组合并）
-│   ├── principles.md              ← 原则候选 329 条（6 组合并）
-│   ├── cases.md                   ← 案例候选 44 条
-│   ├── counter-examples.md        ← 反例候选 35 条
-│   └── glossary.md                ← 术语候选 48 条
-├── bundle/                        ← 编译源：10 张能力卡的规范副本
-│   ├── verified.yaml              ← 10 张卡的元数据、判据、晋级结论
-│   ├── cards/                     ← 10 张能力卡（R/I/A1/A2/E/B 六段）
-│   └── book/
-│       ├── overview.md            ← 整书概览
-│       └── glossary.md            ← 术语表
-├── single/                        ← 单一入口模式
-│   └── behavioral-game-theory-skill/
-│       ├── SKILL.md               ← 入口：触发条件 + 路由表 + 加载规则
-│       ├── BUILD_MANIFEST.json    ← 编译清单与文件哈希
-│       ├── test-prompts.json      ← 入口级触发与边界用例（随包分发，便于装机后回归）
-│       └── references/
-│           ├── overview.md
-│           ├── capability-index.md  ← 完整意图与关键词索引
-│           ├── cheatsheet.md        ← 决策规则速查
-│           ├── glossary.md
-│           └── capabilities/        ← 10 张能力卡
-├── pack/                          ← 多入口模式（compact pack）
-│   ├── BUILD_MANIFEST.json
-│   ├── capability-destinations.json ← 10 张卡的去向映射
-│   ├── behavioral-game-theory-skill-router/
-│   │   ├── SKILL.md               ← 来源路由入口（3 张 router 卡经此访问）
-│   │   └── references/
-│   │       ├── overview.md
-│   │       ├── capability-index.md
-│   │       ├── cheatsheet.md
-│   │       ├── glossary.md
-│   │       └── capabilities/       ← 10 张卡的原文视图
-│   ├── model-recipe-selection/SKILL.md
-│   ├── social-preference-measure/SKILL.md
-│   ├── cognitive-hierarchy-first-round/SKILL.md
-│   ├── ewa-learning-model/SKILL.md
-│   ├── coordination-selection/SKILL.md
-│   ├── signal-reading/SKILL.md
-│   └── market-entry-dynamics/SKILL.md
-└── evals/                         ← 触发盲测与输出评测
-    ├── test-prompts.json          ← 入口级触发与边界用例
-    └── test-results.md            ← 逐项评分、问题登记与局限声明
+├── README.md              ← 你正在看的
+├── README.en.md           ← English version
+├── LICENSE                ← MIT
+├── BOOK_OVERVIEW.md       ← 阶段 0 产出：全书 Adler 分析
+├── INDEX.md               ← 阶段 3 产出：skill 总览 + 依赖关系
+├── verified.md            ← 通过三重验证的 504 个单元
+├── TEST_SUMMARY.md        ← 阶段 4 产出：压力测试摘要
+├── CANGJIE_ADAPTATION.md  ← 仓颉适配说明
+├── GITHUB_REPO.md         ← 仓库元数据
+├── test-results.md        ← 测试结果记录
+├── candidates/            ← 阶段 1 产出：原始候选池
+│   ├── frameworks.md      ← 框架与方法候选
+│   ├── principles.md      ← 原则 / 规则 / 计算候选
+│   ├── cases.md           ← 书中案例候选
+│   ├── counter-examples.md← 反例与边界候选
+│   └── glossary.md        ← 术语候选
+├── rejected/              ← 阶段 1.5 产出：被淘汰的单元 + 原因
+├── bundle/                ← 编译事实源
+│   ├── verified.yaml      ← 能力元数据、判据与去向
+│   ├── cards/             ← 能力卡源文件（六段结构）
+│   └── book/              ← overview.md + glossary.md
+├── single/                ← single 模式（1 个入口 + 全部能力卡）
+│   └── behavioral-game-theory-skill/SKILL.md  ← 入口：触发 + 路由表 + 加载规则
+└── pack/                  ← pack 模式（1 个路由入口 + 7 个晋级 skill）
+    └── */SKILL.md         ← 8 个 skill，其中 6 个附 test-prompts.json
 ```
 
 ## 如何使用
