@@ -131,6 +131,8 @@ behavioral-game-theory-skill/
 ├── DIGEST.md              ← stage 5 output: reader-facing distilled long-form essay
 ├── INDEX.md               ← stage 3 output: skill map + dependencies
 ├── verified.md            ← 504 units that passed triple verification
+├── coverage-audit.md      ← stage 1.5 output: coverage audit of the book's key tasks
+├── needs-review.md        ← stage 1.5 output: open questions and known gaps
 ├── TEST_SUMMARY.md        ← stage 4 output: stress-test summary
 ├── CANGJIE_ADAPTATION.md  ← cangjie adaptation notes
 ├── GITHUB_REPO.md         ← repository metadata
